@@ -1,26 +1,148 @@
 @import "tailwindcss";
 
+/* `dark:` follows the class next-themes puts on <html>, not the OS setting. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------
+   Design tokens — Blueprint amber
+   Dark is the default theme, so it lives on :root (also the no-JS state).
+   ------------------------------------------------------------------ */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg: #0d1520;
+  --surface: #132033;
+  --border: #26384f;
+  --text: #e8edf3;
+  --muted: #a0b0c2;
+  --accent: #e8b04a;
+  --on-accent: #1a1204;
+  --accent-soft: rgba(232, 176, 74, 0.14);
+
+  /* Section backgrounds */
+  --sec-nav: #070d16;
+  --sec-hero: #070d16;
+  --sec-about: #0d1520;
+  --sec-experience: #111d2e;
+  --sec-projects: #16263b;
+  --sec-contact: #e8b04a;
+  --card: #0d1520;
+  --media: #1f3350;
+  --contact-text: #1a1204;
+  --contact-accent: #6b3f00;
+  --contact-hi-bg: #0d1520;
+  --contact-hi-text: #e8b04a;
+
+  /* Layout (theme-independent) */
+  --content-max: 1280px;
+  --gutter: 24px;
+  --section-y: 72px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.light {
+  --bg: #f4f1e8;
+  --surface: #fffdf8;
+  --border: #dcd4c2;
+  --text: #14202e;
+  --muted: #55606e;
+  --accent: #8a5600;
+  --on-accent: #ffffff;
+  --accent-soft: rgba(138, 86, 0, 0.1);
+
+  --sec-nav: #ebe4d3;
+  --sec-hero: #ebe4d3;
+  --sec-about: #f4f1e8;
+  --sec-experience: #fffdf8;
+  --sec-projects: #e5ebf2;
+  --sec-contact: #14304f;
+  --card: #ffffff;
+  --media: #d7e0ea;
+  --contact-text: #f4f1e8;
+  --contact-accent: #f0c26a;
+  --contact-hi-bg: #e8b04a;
+  --contact-hi-text: #1a1204;
 }
 
-@media (prefers-color-scheme: dark) {
+@media (width >= 48rem) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --gutter: 48px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (width >= 64rem) {
+  :root {
+    --gutter: 80px;
+    --section-y: 112px;
+  }
+}
+
+/* ------------------------------------------------------------------
+   Tailwind mapping. `inline` makes utilities reference the variables
+   directly (bg-bg → var(--bg)), so a theme switch needs no rebuild.
+   ------------------------------------------------------------------ */
+@theme inline {
+  /* Drop Tailwind's palette: components can only use our tokens. */
+  --color-*: initial;
+
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-border: var(--border);
+  --color-text: var(--text);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-soft: var(--accent-soft);
+
+  --color-sec-nav: var(--sec-nav);
+  --color-sec-hero: var(--sec-hero);
+  --color-sec-about: var(--sec-about);
+  --color-sec-experience: var(--sec-experience);
+  --color-sec-projects: var(--sec-projects);
+  --color-sec-contact: var(--sec-contact);
+  --color-card: var(--card);
+  --color-media: var(--media);
+  --color-contact-text: var(--contact-text);
+  --color-contact-accent: var(--contact-accent);
+  --color-contact-hi-bg: var(--contact-hi-bg);
+  --color-contact-hi-text: var(--contact-hi-text);
+
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --container-content: var(--content-max);
+}
+
+@theme {
+  --radius-btn: 10px; /* buttons */
+  --radius-tile: 12px; /* technology tiles */
+  --radius-panel: 14px; /* experience accordion */
+  --radius-card: 16px; /* project cards */
+}
+
+/* Page-width wrapper: 1280px of content plus the responsive gutter. */
+@utility page-container {
+  width: 100%;
+  max-width: calc(var(--content-max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+@utility section-y {
+  padding-block: var(--section-y);
+}
+
+@layer base {
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+  }
 }
