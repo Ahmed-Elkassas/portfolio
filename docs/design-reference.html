@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Layout 1 v2 — section backgrounds</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&amp;family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;font-family:"IBM Plex Sans",system-ui,sans-serif}
+a{color:inherit}a:hover{opacity:.88}
+.sec-h .anchor{opacity:0;transition:opacity .15s ease}
+.sec-h:hover .anchor,.sec-h:focus-visible .anchor{opacity:1}
+.lift{transition:transform .2s ease}
+.lift:hover{transform:translateY(-4px)}
+@keyframes wheel{0%{transform:translateY(0);opacity:1}70%{transform:translateY(12px);opacity:0}100%{transform:translateY(0);opacity:0}}
+@keyframes nudge{0%,100%{transform:translateY(0);opacity:.5}50%{transform:translateY(6px);opacity:1}}
+.scroll-wheel{animation:wheel 1.8s ease-in-out infinite}
+.scroll-chev{animation:nudge 1.8s ease-in-out infinite}
+.scroll-cue:hover{opacity:1}
+@media (prefers-reduced-motion: reduce){.scroll-wheel,.scroll-chev{animation:none}}
+</style>
+</helmet>
+<div style="width: 1440px; height: 5260px; position: relative; display: flex; flex-direction: column; background: {{t.bg}}; color: {{t.text}}; font-family: 'IBM Plex Sans', system-ui, sans-serif">
+
+<header style="position: sticky; top: 0; z-index: 10; height: 84px; box-sizing: border-box; padding: 0 80px; display: flex; align-items: center; justify-content: space-between; background: {{s.nav}}; border-bottom: 1px solid {{t.border}}">
+<a href="#home" style="display: flex; align-items: center; gap: 14px; text-decoration: none; color: {{t.text}}">
+<span style="width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: {{t.accent}}; color: {{t.onAccent}}; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: 0.5px">AE</span>
+<span style="display: flex; flex-direction: column; gap: 2px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 17px">Ahmed Elqassas</span>
+<span style="font-size: 14px; color: {{t.muted}}">Frontend Engineer</span>
+</span>
+</a>
+<nav aria-label="Sections" style="display: flex; align-items: center; gap: 8px">
+<a href="#about" style="padding: 12px 14px; font-size: 15px; text-decoration: none; color: {{t.muted}}">About</a>
+<a href="#experience" style="padding: 12px 14px; font-size: 15px; text-decoration: none; color: {{t.muted}}">Experience</a>
+<a href="#projects" style="padding: 12px 14px; font-size: 15px; text-decoration: none; color: {{t.muted}}">Projects</a>
+<a href="#contact" style="margin-left: 8px; height: 44px; padding: 0 20px; display: inline-flex; align-items: center; border-radius: 999px; border: 1.5px solid {{t.accent}}; color: {{t.accent}}; font-size: 15px; font-weight: 600; text-decoration: none">Contact</a>
+<button onClick="{{toggleTheme}}" aria-label="Switch colour theme" style="margin-left: 12px; width: 44px; height: 44px; border-radius: 10px; border: 1px solid {{t.border}}; background: {{t.surface}}; color: {{t.text}}; display: flex; align-items: center; justify-content: center; cursor: pointer">
+<sc-if value="{{isDark}}" hint-placeholder-val="{{ true }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+</sc-if>
+<sc-if value="{{isLight}}" hint-placeholder-val="{{ false }}">
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path></svg>
+</sc-if>
+</button>
+</nav>
+</header>
+
+<section id="home" style="height: 816px; box-sizing: border-box; padding: 0 80px; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; background: {{s.hero}}">
+<span aria-hidden="true" style="position: absolute; right: 40px; top: 50%; transform: translateY(-54%); font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 520px; line-height: 1; letter-spacing: -24px; color: transparent; -webkit-text-stroke: 2px {{t.border}}">AE</span>
+<div style="position: relative; align-self: flex-start; padding: {{heroPad}}; display: flex; flex-direction: column; gap: 28px; max-width: 980px">
+<sc-if value="{{shapeBrackets}}" hint-placeholder-val="{{ false }}">
+<span aria-hidden="true" style="position: absolute; top: 0; left: 0; width: 34px; height: 34px; border-top: 3px solid {{t.accent}}; border-left: 3px solid {{t.accent}}"></span>
+<span aria-hidden="true" style="position: absolute; top: 0; right: 0; width: 34px; height: 34px; border-top: 3px solid {{t.accent}}; border-right: 3px solid {{t.accent}}"></span>
+<span aria-hidden="true" style="position: absolute; bottom: 0; left: 0; width: 34px; height: 34px; border-bottom: 3px solid {{t.accent}}; border-left: 3px solid {{t.accent}}"></span>
+<span aria-hidden="true" style="position: absolute; bottom: 0; right: 0; width: 34px; height: 34px; border-bottom: 3px solid {{t.accent}}; border-right: 3px solid {{t.accent}}"></span>
+</sc-if>
+<span style="align-self: flex-start; padding: 8px 16px; border-radius: 999px; border: 1px solid {{t.border}}; background: {{t.surface}}; font-size: 14px; font-weight: 500; color: {{t.muted}}">Frontend Engineer · Egypt · Remote</span>
+<h1 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 96px; line-height: 1; letter-spacing: -3px">Hi, I'm<br><span style="color: {{t.accent}}">Ahmed Elqassas</span></h1>
+<sc-if value="{{shapeDimension}}" hint-placeholder-val="{{ true }}">
+<div aria-hidden="true" style="width: 740px; margin-top: -8px; display: flex; align-items: center; gap: 14px; color: {{t.accent}}">
+<span style="width: 2px; height: 24px; background: {{t.accent}}"></span>
+<span style="flex-grow: 1; height: 2px; background: {{t.accent}}; opacity: .6"></span>
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 3px">SINCE 2021</span>
+<span style="flex-grow: 1; height: 2px; background: {{t.accent}}; opacity: .6"></span>
+<span style="width: 2px; height: 24px; background: {{t.accent}}"></span>
+</div>
+</sc-if>
+<sc-if value="{{shapeUnderline}}" hint-placeholder-val="{{ false }}">
+<svg aria-hidden="true" width="720" height="34" viewBox="0 0 720 34" fill="none" stroke="{{t.accent}}" stroke-width="5" stroke-linecap="round" style="margin-top: -22px"><path d="M8 24c110-16 250-20 420-13s240 6 284-4"></path></svg>
+</sc-if>
+<p style="margin: 0; font-size: 28px; line-height: 1.4; max-width: 680px">I build the systems other developers build on.</p>
+</div>
+<a href="#about" class="scroll-cue" aria-label="Scroll to About" style="position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); width: 56px; height: 84px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; text-decoration: none; color: {{t.muted}}">
+<svg width="30" height="46" viewBox="0 0 30 46" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="1" width="28" height="44" rx="14"></rect><rect class="scroll-wheel" x="13" y="9" width="4" height="9" rx="2" fill="{{t.accent}}" stroke="none"></rect></svg>
+<svg class="scroll-chev" width="16" height="10" viewBox="0 0 16 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 2l6 6 6-6"></path></svg>
+</a>
+</section>
+
+<section id="about" style="padding: 112px 80px 120px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 96px; background: {{s.about}}; border-top: 1px solid {{t.border}}">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<a class="sec-h" href="#about" style="display: inline-flex; align-items: center; gap: 14px; text-decoration: none; color: {{t.text}}">
+<span style="width: 44px; height: 44px; border-radius: 10px; background: {{t.soft}}; color: {{t.accent}}; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z"></path></svg>
+</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 44px; letter-spacing: -1px">About</h2>
+<svg class="anchor" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path></svg>
+</a>
+<p style="margin: 0; font-style: italic; font-size: 24px; line-height: 1.45">Civil engineer turned frontend engineer. Still learning the way I started: one problem at a time.</p>
+<p style="margin: 0; font-size: 18px; line-height: 1.7; color: {{t.muted}}">Since 2021 I've built web products end to end. For the last three years I've worked on both halves of a multi-tenant real-estate SaaS at iCloud-Ready: the admin platform where staff configure their site, and the build that turns that configuration into a live website, in English and Arabic.</p>
+<p style="margin: 0; font-size: 18px; line-height: 1.7; color: {{t.muted}}">I'm careful with things that already exist. Most of my hardest work has been changing a live system without breaking the data already in it.</p>
+<a href="#" style="align-self: flex-start; margin-top: 8px; height: 50px; padding: 0 22px; display: inline-flex; align-items: center; gap: 10px; border-radius: 10px; border: 1px solid {{t.border}}; background: {{s.card}}; color: {{t.text}}; text-decoration: none; font-weight: 600; font-size: 15px">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"></path></svg>
+Download CV
+</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 24px; padding-top: 10px">
+<div style="font-family: 'IBM Plex Mono', monospace; font-size: 13px; letter-spacing: 2px; color: {{t.muted}}">TECHNOLOGIES</div>
+<div style="display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 14px">
+<sc-for list="{{tech}}" as="x" hint-placeholder-count="15">
+<div class="lift" style="height: 108px; border-radius: 12px; border: 1px solid {{t.border}}; background: {{s.card}}; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px">
+<svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="{{x.d}}"></path></svg>
+<span style="font-size: 13px; color: {{t.muted}}">{{x.name}}</span>
+</div>
+</sc-for>
+</div>
+</div>
+</section>
+
+<section id="experience" style="padding: 112px 80px; background: {{s.experience}}; border-top: 1px solid {{t.border}}; display: flex; flex-direction: column; gap: 48px">
+<div style="display: flex; flex-direction: column; gap: 14px; max-width: 760px">
+<a class="sec-h" href="#experience" style="display: inline-flex; align-items: center; gap: 14px; text-decoration: none; color: {{t.text}}">
+<span style="width: 44px; height: 44px; border-radius: 10px; background: {{t.soft}}; color: {{t.accent}}; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"></rect><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 13h18"></path></svg>
+</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 44px; letter-spacing: -1px">Experience</h2>
+<svg class="anchor" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path></svg>
+</a>
+<p style="margin: 0; font-size: 18px; line-height: 1.6; color: {{t.muted}}">Shipping since 2021, most of it on products people use every day.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; max-width: 1000px">
+<sc-for list="{{jobs}}" as="job" hint-placeholder-count="3">
+<div style="display: flex; gap: 28px">
+<div style="width: 20px; display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 30px">
+<span style="width: 16px; height: 16px; border-radius: 50%; background: {{job.dot}}; border: 2px solid {{t.accent}}; box-sizing: border-box"></span>
+<span style="width: 1px; flex-grow: 1; background: {{t.border}}"></span>
+</div>
+<div style="flex-grow: 1; border: 1px solid {{t.border}}; border-radius: 14px; background: {{s.card}}">
+<button onClick="{{job.toggle}}" aria-expanded="{{job.expanded}}" style="width: 100%; min-height: 96px; padding: 24px 28px; border: 0; background: transparent; color: {{t.text}}; display: flex; align-items: center; justify-content: space-between; text-align: left; cursor: pointer; font-family: inherit">
+<span style="display: flex; flex-direction: column; gap: 6px">
+<span style="display: flex; align-items: center; gap: 12px">
+<span style="font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 22px">{{job.role}}</span>
+<sc-if value="{{job.current}}" hint-placeholder-val="{{ false }}">
+<span style="padding: 3px 10px; border-radius: 999px; background: {{t.soft}}; color: {{t.accent}}; font-size: 12px; font-weight: 600">Current</span>
+</sc-if>
+</span>
+<span style="font-size: 15px; color: {{t.muted}}">{{job.org}} · {{job.dates}}</span>
+</span>
+<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="transform: {{job.chevron}}"><path d="M6 9l6 6 6-6"></path></svg>
+</button>
+<sc-if value="{{job.isOpen}}" hint-placeholder-val="{{ true }}">
+<div style="padding: 24px 28px 28px; border-top: 1px solid {{t.border}}; display: flex; flex-direction: column; gap: 16px">
+<p style="margin: 0; font-size: 16px; line-height: 1.65; color: {{t.muted}}">{{job.summary}}</p>
+<ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 10px">
+<sc-for list="{{job.bullets}}" as="b" hint-placeholder-count="3">
+<li style="font-size: 16px; line-height: 1.6">{{b}}</li>
+</sc-for>
+</ul>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{job.stack}}" as="st" hint-placeholder-count="5">
+<span style="padding: 5px 10px; border-radius: 6px; border: 1px solid {{t.border}}; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{t.muted}}">{{st}}</span>
+</sc-for>
+</div>
+</div>
+</sc-if>
+</div>
+</div>
+</sc-for>
+</div>
+</section>
+
+<section id="projects" style="padding: 112px 80px; background: {{s.projects}}; border-top: 1px solid {{t.border}}; display: flex; flex-direction: column; gap: 48px">
+<a class="sec-h" href="#projects" style="display: inline-flex; align-items: center; gap: 14px; text-decoration: none; color: {{t.text}}">
+<span style="width: 44px; height: 44px; border-radius: 10px; background: {{t.soft}}; color: {{t.accent}}; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l10 5-10 5L2 7zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+</span>
+<h2 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 44px; letter-spacing: -1px">Projects</h2>
+<svg class="anchor" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="{{t.accent}}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path></svg>
+</a>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px">
+<sc-for list="{{projects}}" as="p" hint-placeholder-count="6">
+<article class="lift" style="border: 1px solid {{t.border}}; border-radius: 16px; background: {{s.card}}; overflow: hidden; display: flex; flex-direction: column">
+<div style="height: 200px; display: flex; align-items: center; justify-content: center; background: {{s.media}}; font-family: 'IBM Plex Mono', monospace; font-size: 13px; color: {{t.muted}}">[Project image]</div>
+<div style="padding: 28px; display: flex; flex-direction: column; gap: 14px; flex-grow: 1">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 1.5px; color: {{t.accent}}">{{p.where}}</span>
+<h3 style="margin: 0; font-family: 'Space Grotesk', sans-serif; font-weight: 600; font-size: 24px; line-height: 1.25">{{p.title}}</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: {{t.muted}}">{{p.desc}}</p>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<sc-for list="{{p.proof}}" as="m" hint-placeholder-count="3">
+<span style="padding: 6px 12px; border-radius: 999px; background: {{t.soft}}; color: {{t.text}}; font-size: 13px; font-weight: 500">{{m}}</span>
+</sc-for>
+</div>
+<div style="margin-top: auto; padding-top: 16px; border-top: 1px solid {{t.border}}; display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<span style="font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 1.5px; color: {{t.muted}}; margin-right: 4px">STACK</span>
+<sc-for list="{{p.stack}}" as="st" hint-placeholder-count="4">
+<span style="padding: 4px 10px; border-radius: 6px; border: 1px solid {{t.border}}; font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: {{t.muted}}">{{st}}</span>
+</sc-for>
+</div>
+</div>
+</article>
+</sc-for>
+</div>
+</section>
+
+<section id="contact" style="padding: {{s.contactPad}}; background: {{s.contact}}">
+<div style="border-radius: {{s.panelRadius}}; background: {{s.panel}}; color: {{s.onPanel}}; padding: 104px 80px 96px; display: flex; flex-direction: column; align-items: center; gap: 20px">
+<a class="sec-h" href="#contact" style="display: inline-flex; align-items: center; gap: 12px; text-decoration: none; color: {{s.onPanel}}; font-size: 15px; font-weight: 600">
+<span style="width: 44px; height: 44px; border-radius: 10px; border: 1.5px solid {{s.onPanel}}; display: flex; align-items: center; justify-content: center">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM22 6l-10 7L2 6"></path></svg>
+</span>
+<span>Contact</span>
+<svg class="anchor" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"></path><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"></path></svg>
+</a>
+<h2 style="margin: 0; text-align: center; font-family: 'Space Grotesk', sans-serif; font-weight: 700; font-size: 88px; line-height: 1.05; letter-spacing: -2px">Something to <span style="color: {{s.panelAccent}}">build?</span><br>Let's make it <span style="padding: 0 18px; border-radius: 18px; background: {{s.panelHi}}; color: {{s.panelHiText}}">last.</span></h2>
+<svg width="260" height="170" viewBox="0 0 260 170" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin: 8px 0 -10px 280px"><path d="M20 10c-6 40 30 70 90 60s110-40 125 5c12 38-30 72-70 82"></path><path d="M188 132l-24 26 32 8"></path></svg>
+<p style="margin: 0; font-size: 18px">Send me an email — I usually reply within a day.</p>
+<a href="mailto:dev.ahmedbasuony@gmail.com" style="color: {{s.onPanel}}; font-size: 64px; letter-spacing: -1px; text-underline-offset: 10px; text-decoration-thickness: 3px">dev.ahmedbasuony@gmail.com</a>
+<div style="display: flex; gap: 12px; margin-top: 28px">
+<a href="https://linkedin.com/in/ahmed-elkassas" style="height: 48px; padding: 0 20px; display: inline-flex; align-items: center; border-radius: 999px; border: 1px solid {{s.onPanel}}; color: {{s.onPanel}}; text-decoration: none; font-size: 15px">LinkedIn</a>
+<a href="https://github.com/Ahmed-Elkassas" style="height: 48px; padding: 0 20px; display: inline-flex; align-items: center; border-radius: 999px; border: 1px solid {{s.onPanel}}; color: {{s.onPanel}}; text-decoration: none; font-size: 15px">GitHub</a>
+<a href="#" style="height: 48px; padding: 0 20px; display: inline-flex; align-items: center; border-radius: 999px; border: 1px solid {{s.onPanel}}; color: {{s.onPanel}}; text-decoration: none; font-size: 15px">Download CV</a>
+</div>
+<p style="margin: 8px 0 0; font-size: 14px">Egypt · Remote · Arabic &amp; English</p>
+</div>
+</section>
+
+<footer style="flex-grow: 1; padding: 32px 80px; border-top: 1px solid {{t.border}}; display: flex; justify-content: space-between; font-size: 14px; color: {{t.muted}}; background: {{t.bg}}">
+<span>© 2026 Ahmed Elqassas</span>
+<span>Built with Next.js &amp; Tailwind</span>
+</footer>
+
+<a href="https://linkedin.com/in/ahmed-elkassas" aria-label="Let's connect on LinkedIn" style="position: absolute; right: 28px; top: 700px; z-index: 20; height: 54px; padding: 0 22px 0 9px; display: flex; align-items: center; gap: 10px; border-radius: 999px; background: {{t.accent}}; color: {{t.onAccent}}; text-decoration: none; font-weight: 700; font-size: 15px; box-shadow: 0 10px 30px rgba(0,0,0,.28)">
+<span style="width: 36px; height: 36px; border-radius: 50%; background: {{t.onAccent}}; color: {{t.accent}}; display: flex; align-items: center; justify-content: center">
+<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+</span>
+Let's connect
+</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"sectionColors":{"editor":"enum","options":["solid","themed"],"default":"themed"},"heroShape":{"editor":"enum","options":["none","brackets","dimension","underline"],"default":"underline"},"$preview":{"width":1440,"height":5260}}'>
+class Component extends DCLogic {
+  data() {
+    return {
+      T: {
+        dark: { bg: '#0d1520', surface: '#132033', border: '#26384f', text: '#e8edf3', muted: '#a0b0c2', accent: '#e8b04a', onAccent: '#1a1204', soft: 'rgba(232,176,74,.14)' },
+        light: { bg: '#f4f1e8', surface: '#fffdf8', border: '#dcd4c2', text: '#14202e', muted: '#55606e', accent: '#8a5600', onAccent: '#ffffff', soft: 'rgba(138,86,0,.10)' }
+      },
+      S: {
+        solid: {
+          dark: { nav: '#0d1520', hero: '#0d1520', about: '#0d1520', experience: '#0d1520', projects: '#0d1520', contact: '#0d1520', card: '#132033', media: '#1a2a40', contactPad: '24px 80px 112px', panelRadius: '32px', panel: '#1d3a5f', onPanel: '#f3efe4', panelAccent: '#f0c26a', panelHi: '#2c5a8f', panelHiText: '#f3efe4' },
+          light: { nav: '#f4f1e8', hero: '#f4f1e8', about: '#f4f1e8', experience: '#f4f1e8', projects: '#f4f1e8', contact: '#f4f1e8', card: '#fffdf8', media: '#ebe5d6', contactPad: '24px 80px 112px', panelRadius: '32px', panel: '#14304f', onPanel: '#f4f1e8', panelAccent: '#f0c26a', panelHi: '#2c5a8f', panelHiText: '#f4f1e8' }
+        },
+        themed: {
+          dark: { nav: '#070d16', hero: '#070d16', about: '#0d1520', experience: '#111d2e', projects: '#16263b', contact: '#e8b04a', card: '#0d1520', media: '#1f3350', contactPad: '0', panelRadius: '0', panel: '#e8b04a', onPanel: '#1a1204', panelAccent: '#6b3f00', panelHi: '#0d1520', panelHiText: '#e8b04a' },
+          light: { nav: '#ebe4d3', hero: '#ebe4d3', about: '#f4f1e8', experience: '#fffdf8', projects: '#e5ebf2', contact: '#14304f', card: '#ffffff', media: '#d7e0ea', contactPad: '0', panelRadius: '0', panel: '#14304f', onPanel: '#f4f1e8', panelAccent: '#f0c26a', panelHi: '#e8b04a', panelHiText: '#1a1204' }
+        }
+      },
+      tech: [
+        { name: 'JavaScript', d: 'M8 6l-6 6 6 6M16 6l6 6-6 6' },
+        { name: 'TypeScript', d: 'M8 3H7a2 2 0 0 0-2 2v5a2 2 0 0 1-2 2 2 2 0 0 1 2 2v5a2 2 0 0 0 2 2h1M16 3h1a2 2 0 0 1 2 2v5a2 2 0 0 0 2 2 2 2 0 0 0-2 2v5a2 2 0 0 1-2 2h-1' },
+        { name: 'React', d: 'M5.5 8.5L9 12l-3.5 3.5L2 12zM12 2l3.5 3.5L12 9 8.5 5.5zM18.5 8.5L22 12l-3.5 3.5L15 12zM12 15l3.5 3.5L12 22l-3.5-3.5z' },
+        { name: 'Next.js', d: 'M13 2L3 14h9l-1 8 10-12h-9z' },
+        { name: 'Gatsby', d: 'M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8zM14 2v6h6M9 13h6M9 17h6' },
+        { name: 'React Query', d: 'M21 12a9 9 0 0 1-15 6.7L3 16M3 12a9 9 0 0 1 15-6.7L21 8M21 3v5h-5M3 21v-5h5' },
+        { name: 'Redux', d: 'M21 8l-9-5-9 5 9 5zM3 8v8l9 5 9-5V8M12 13v8' },
+        { name: 'Tailwind', d: 'M3 8h11a3 3 0 1 0-3-3M3 16h15a3 3 0 1 1-3 3M3 12h18' },
+        { name: 'Ant Design', d: 'M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z' },
+        { name: 'Material UI', d: 'M12 2l10 5-10 5L2 7zM2 17l10 5 10-5M2 12l10 5 10-5' },
+        { name: 'Parse Server', d: 'M3 3h18v7H3zM3 14h18v7H3zM7 6.5h.01M7 17.5h.01' },
+        { name: 'AWS S3', d: 'M17.5 19H9a7 7 0 1 1 6.7-9h1.8a4.5 4.5 0 1 1 0 9z' },
+        { name: 'RTL & i18n', d: 'M12 2a10 10 0 1 0 0 20 10 10 0 1 0 0-20zM2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20' },
+        { name: 'Git', d: 'M6 3v12M18 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 21a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM18 9a9 9 0 0 1-9 9' },
+        { name: 'HTML & CSS', d: 'M4 9h16M4 15h16M10 3L8 21M16 3l-2 18' }
+      ],
+      jobs: [
+        { role: 'Frontend Engineer', org: 'iCloud-Ready', dates: 'Mar 2023 – Present', current: true,
+          summary: 'Both halves of a multi-tenant real-estate SaaS: the admin platform where staff configure their site, and the build that turns it into a live website.',
+          bullets: [
+            'Built the config-driven admin framework the team now builds on: 39 modules use its table, 19 its form engine, across 114 admin routes.',
+            'Only frontend developer on the websites codebase for its first 13 months; shipped a full community-management module alone in 4 months.',
+            'Built both sides of a bilingual visual page builder: 254 sections across 11 templates.',
+            'Built an agent appointment-booking dashboard integrated with Google Calendar.'
+          ],
+          stack: ['React', 'Next.js', 'Gatsby', 'TypeScript', 'React Query', 'Ant Design', 'Tailwind'] },
+        { role: 'Frontend Developer', org: 'AWStreams', dates: 'Jul 2021 – Oct 2022', current: false,
+          summary: 'Product and client work at a digital agency.',
+          bullets: [
+            'Rebuilt the OZZ.me web app in vanilla JavaScript.',
+            'Built the OZZ admin dashboard from scratch with React, Redux and Material UI.',
+            'Customised WordPress client sites and improved UI performance with the backend team.'
+          ],
+          stack: ['JavaScript', 'React', 'Redux', 'Material UI', 'WordPress'] },
+        { role: 'BSc Civil Engineering', org: 'Higher Technological Institute', dates: '2012 – 2018', current: false,
+          summary: 'Before software. Self-taught into frontend from here.',
+          bullets: [], stack: [] }
+      ],
+      projects: [
+        { where: 'ICLOUD-READY · 2023 — NOW', title: 'Config-driven admin framework', desc: 'About seventy record types, each described once in a small config file. Tables, filters, forms, bulk actions and Excel import are generated from it.', proof: ['39 modules', '19 form engines', '114 routes'], stack: ['React', 'TypeScript', 'Ant Design', 'React Query'] },
+        { where: 'ICLOUD-READY · 2024 — NOW', title: 'Bilingual visual page builder', desc: 'Marketers compose pages from a section gallery, write English and Arabic side by side and publish without a developer. I built the editor and the renderer.', proof: ['254 sections', '11 templates'], stack: ['React', 'Gatsby', 'Tailwind', 'RTL/i18n'] },
+        { where: 'SAUDI DEVELOPER · 2026', title: 'Arabic-first property portal', desc: 'Built from an empty folder: faceted search, project and unit pages, branded maps, favourites, accounts and online reservations.', proof: ['~2,000 units', 'Arabic by default'], stack: ['Next.js', 'TypeScript', 'React Query', 'Tailwind'] },
+        { where: 'ICLOUD-READY · 2025', title: 'Changing a live system safely', desc: 'Moved four record types from a multi-step wizard to one-step creation, with no risky overnight migration: old records repair themselves when opened.', proof: ['4 record types', 'Zero downtime'], stack: ['React', 'TypeScript', 'Parse Server'] },
+        { where: 'ICLOUD-READY', title: 'Agent booking dashboard', desc: 'Appointment booking and schedule management for sales agents, synced with Google Calendar.', proof: ['Google Calendar'], stack: ['React', 'Ant Design', 'Google Calendar API'] },
+        { where: 'AWSTREAMS · 2021 — 22', title: 'OZZ.me app and admin dashboard', desc: 'Rebuilt the contactless digital-wallet web app and built its admin dashboard from scratch.', proof: ['Web app + admin'], stack: ['JavaScript', 'React', 'Redux', 'Material UI'] }
+      ]
+    };
+  }
+  renderVals() {
+    const st = this.state || {};
+    const theme = st.theme || 'dark';
+    const open = st.open === undefined ? 0 : st.open;
+    const d = this.data();
+    const mode = this.props.sectionColors === 'themed' ? 'themed' : 'solid';
+    const t = d.T[theme];
+    const s = d.S[mode][theme];
+    const shape = ['none', 'brackets', 'dimension', 'underline'].indexOf(this.props.heroShape) >= 0 ? this.props.heroShape : 'underline';
+    return {
+      t: t,
+      s: s,
+      shapeBrackets: shape === 'brackets',
+      shapeDimension: shape === 'dimension',
+      shapeUnderline: shape === 'underline',
+      heroPad: shape === 'brackets' ? '48px 56px' : '0',
+      isDark: theme === 'dark',
+      isLight: theme === 'light',
+      toggleTheme: () => this.setState({ theme: theme === 'dark' ? 'light' : 'dark' }),
+      tech: d.tech,
+      projects: d.projects,
+      jobs: d.jobs.map((j, i) => Object.assign({}, j, {
+        isOpen: open === i,
+        expanded: open === i ? 'true' : 'false',
+        chevron: open === i ? 'rotate(180deg)' : 'rotate(0deg)',
+        dot: open === i ? t.accent : s.card,
+        toggle: () => this.setState({ open: open === i ? -1 : i })
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>
