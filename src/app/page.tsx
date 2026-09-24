@@ -1,28 +1,15 @@
-import { BriefcaseBusiness, Layers, Mail, User } from "lucide-react";
+import { BriefcaseBusiness, Layers, Mail } from "lucide-react";
+import { About } from "@/components/sections/about";
+import { Hero } from "@/components/sections/hero";
 import { SectionHeading } from "@/components/ui/section-heading";
-import { site } from "@/content/site";
 
-// PLACEHOLDER (Phase 2): empty sections so the navbar, scroll-spy and
-// headings can be reviewed. Phase 3 replaces each with its real component.
+// Home and About are real. Experience, Projects and Contact are still
+// PLACEHOLDERS; the rest of Phase 3 replaces them.
 export default function Home() {
   return (
     <>
-      <section
-        id="home"
-        className="flex min-h-[calc(100svh-84px)] items-center bg-sec-hero"
-      >
-        <div className="page-container">
-          <h1 className="text-[52px] leading-none font-bold tracking-[-3px] lg:text-8xl">
-            Hi, I&apos;m <span className="block text-accent">{site.name}</span>
-          </h1>
-        </div>
-      </section>
-
-      <section id="about" className="section-y min-h-svh bg-sec-about">
-        <div className="page-container">
-          <SectionHeading id="about" title="About" icon={<User />} />
-        </div>
-      </section>
+      <Hero />
+      <About />
 
       <section id="experience" className="section-y min-h-svh bg-sec-experience">
         <div className="page-container">
