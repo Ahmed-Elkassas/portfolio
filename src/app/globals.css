@@ -131,6 +131,11 @@
 }
 
 @layer base {
+  /* Anchor jumps land below the 84px sticky navbar. */
+  html {
+    scroll-padding-top: 96px;
+  }
+
   body {
     background-color: var(--bg);
     color: var(--text);
