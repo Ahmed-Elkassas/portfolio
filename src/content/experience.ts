@@ -38,7 +38,7 @@ export const experienceItems: ExperienceItem[] = [
     ],
     featured: [
       "Config-driven admin framework",
-      "Bilingual visual page builder",
+      "Website builder behind 9+ live sites",
       "Arabic-first property portal",
     ],
     stack: [
