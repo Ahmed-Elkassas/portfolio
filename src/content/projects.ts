@@ -33,12 +33,12 @@ export const projects: Project[] = [
     placeholder: "Platform",
   },
   {
-    title: "Bilingual visual page builder",
+    title: "Website builder behind 9+ live sites",
     where: "iCloud-Ready",
     when: "2023 — now",
     description:
       "Both sides of a page builder: the authoring UI where non-technical marketers compose pages from a section gallery in English and Arabic, with per-element theming, and the renderer that ships them live.",
-    proof: ["9+ websites", "254 sections", "11 templates"],
+    proof: ["English & Arabic", "254 sections", "11 templates"],
     stack: ["React", "Next.js", "Gatsby", "Tailwind", "RTL/i18n"],
     image: {
       src: "/projects/page-builder-sites.png",
