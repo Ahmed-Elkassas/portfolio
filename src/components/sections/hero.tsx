@@ -17,37 +17,47 @@ export function Hero() {
           {site.initials}
         </span>
 
-        <div className="relative flex flex-col items-start gap-7">
+        {/* @container: lets the h1 size itself from this column's width (cqi). */}
+        <div className="@container relative flex flex-col items-start gap-7">
           <p className="rounded-full border border-border bg-surface px-4 py-2 text-sm text-muted">
             {home.badge}
           </p>
 
-          <h1 className="text-[52px] leading-none font-bold tracking-[-3px] lg:text-8xl">
+          {/* The name measures 7.33em in Space Grotesk 700 at -0.03em tracking.
+              Dividing the column width (100cqi) by 7.5 makes it always fit on
+              one line; min() caps it at the design's 96px. */}
+          <h1 className="text-[min(6rem,calc(100cqi/7.5))] leading-none font-bold tracking-[-0.03em]">
             {home.greeting}{" "}
-            <span className="block text-accent">{home.name}</span>
-            {/* Hand-drawn underline. Sized in em (720/96, 22/96) so it
-                scales with the name; draws in once on load. */}
-            <svg
-              aria-hidden="true"
-              width="720"
-              height="34"
-              viewBox="0 0 720 34"
-              fill="none"
-              className="mt-[-0.23em] block h-auto w-[7.5em] max-w-full text-accent"
-            >
-              <path
-                d="M8 24c110-16 250-20 420-13s240 6 284-4"
-                pathLength={1}
-                strokeDasharray={1}
-                stroke="currentColor"
-                strokeWidth={5}
-                strokeLinecap="round"
-                className="motion-safe:animate-draw"
-              />
-            </svg>
+            {/* block = own line; w-fit = only as wide as the name, so the
+                underline inside matches it; nowrap = never two lines. */}
+            <span className="block w-fit mt-1.5 md:mt-0 whitespace-nowrap text-accent">
+              {home.name}
+              {/* Hand-drawn underline: spans the name, pulled up 0.23em
+                  (22/96), draws in once on load. */}
+              <svg
+                aria-hidden="true"
+                width="720"
+                height="34"
+                viewBox="0 0 720 34"
+                fill="none"
+                className="mt-[-0.23em] block h-auto w-full"
+              >
+                <path
+                  d="M8 24c110-16 250-20 420-13s240 6 284-4"
+                  pathLength={1}
+                  strokeDasharray={1}
+                  stroke="currentColor"
+                  strokeWidth={5}
+                  strokeLinecap="round"
+                  className="motion-safe:animate-draw"
+                />
+              </svg>
+            </span>
           </h1>
 
-          <p className="max-w-3xl text-2xl text-text md:text-[28px]">{home.hook}</p>
+          <p className="max-w-3xl text-2xl text-text md:text-[28px]">
+            {home.hook}
+          </p>
         </div>
       </div>
 
@@ -56,8 +66,22 @@ export function Hero() {
         aria-label={home.scrollLabel}
         className="absolute bottom-9 left-1/2 flex h-21 w-14 -translate-x-1/2 flex-col items-center justify-center gap-1 rounded-btn text-muted"
       >
-        <svg aria-hidden="true" width="30" height="46" viewBox="0 0 30 46" fill="none">
-          <rect x="1" y="1" width="28" height="44" rx="14" stroke="currentColor" strokeWidth={2} />
+        <svg
+          aria-hidden="true"
+          width="30"
+          height="46"
+          viewBox="0 0 30 46"
+          fill="none"
+        >
+          <rect
+            x="1"
+            y="1"
+            width="28"
+            height="44"
+            rx="14"
+            stroke="currentColor"
+            strokeWidth={2}
+          />
           <rect
             x="13.5"
             y="9"
@@ -67,7 +91,10 @@ export function Hero() {
             className="fill-accent motion-safe:animate-scroll-wheel"
           />
         </svg>
-        <ChevronDown aria-hidden="true" className="size-4 motion-safe:animate-nudge" />
+        <ChevronDown
+          aria-hidden="true"
+          className="size-4 motion-safe:animate-nudge"
+        />
       </a>
     </section>
   );
