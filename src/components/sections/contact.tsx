@@ -18,7 +18,8 @@ export function Contact() {
       id="contact"
       className="section-y bg-sec-contact text-contact-text"
     >
-      <div className="page-container flex flex-col items-center gap-8 text-center">
+      {/* @container: lets the email size itself from this column's width (cqi). */}
+      <div className="@container page-container flex flex-col items-center gap-8 text-center">
         <SectionHeading
           id="contact"
           title={contact.title}
@@ -46,9 +47,12 @@ export function Contact() {
 
         <p className="text-lg">{contact.lead}</p>
 
+        {/* The address measures 15.4em in Space Grotesk 600, so column ÷ 15.8
+            always fits one line (~21px on a 375px phone); min() caps it at
+            the design's 64px. Underline offset in em (10/64) scales with it. */}
         <a
           href={`mailto:${site.email}`}
-          className="font-display text-2xl md:text-[28px] leading-tight font-semibold wrap-anywhere underline decoration-[3px] underline-offset-[10px] lg:text-[64px]"
+          className="font-display text-[min(4rem,calc(100cqi/15.8))] leading-tight font-semibold whitespace-nowrap underline decoration-[3px] underline-offset-[0.16em]"
         >
           {site.email}
         </a>
