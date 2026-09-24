@@ -1,6 +1,7 @@
 "use client";
 
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { contactLink, navLinks, site } from "@/content/site";
 import { useActiveSection } from "@/hooks/use-active-section";
@@ -44,9 +45,9 @@ export function Navbar() {
   }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-40 h-[84px] border-b border-border bg-sec-nav">
+    <header className="sticky top-0 z-40 h-21 border-b border-border bg-sec-nav">
       <div className="page-container flex h-full items-center justify-between gap-4">
-        <a href="" className="flex items-center gap-3 rounded-btn">
+        <Link href="/" className="flex items-center gap-3 rounded-btn">
           <span
             aria-hidden="true"
             className="grid size-11 shrink-0 place-items-center rounded-btn bg-accent font-display text-lg font-bold text-on-accent"
@@ -62,7 +63,7 @@ export function Navbar() {
               {site.role}
             </span>
           </span>
-        </a>
+        </Link>
 
         <nav aria-label="Primary" className="flex items-center gap-2 lg:gap-8">
           <ul className="hidden items-center gap-8 lg:flex">
