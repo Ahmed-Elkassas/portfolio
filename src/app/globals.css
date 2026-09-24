@@ -116,6 +116,43 @@
   --radius-tile: 12px; /* technology tiles */
   --radius-panel: 14px; /* experience accordion */
   --radius-card: 16px; /* project cards */
+
+  /* Motion. Always applied via `motion-safe:`, so reduced motion gets the
+     finished state. SVG strokes that "draw" use pathLength="1" + dasharray 1. */
+  --animate-draw: draw 900ms ease-out 200ms both;
+  --animate-scroll-wheel: scroll-wheel 1.8s ease-in-out infinite;
+  --animate-nudge: nudge 1.8s ease-in-out infinite;
+
+  @keyframes draw {
+    from {
+      stroke-dashoffset: 1;
+    }
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @keyframes scroll-wheel {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    70%,
+    100% {
+      transform: translateY(12px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes nudge {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(6px);
+    }
+  }
 }
 
 /* Page-width wrapper: 1280px of content plus the responsive gutter. */
